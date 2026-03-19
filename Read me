@@ -1,0 +1,272 @@
+import React from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  SafeAreaView, 
+  ScrollView, 
+  ImageBackground, 
+  TouchableOpacity, 
+  Dimensions 
+} from 'react-native';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+
+const { width } = Dimensions.get('window');
+
+const App = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        
+        {/* Header Section */}
+        <View style={styles.header}>
+          <View style={styles.topIcons}>
+            <View style={styles.logoCircle}>
+              <MaterialCommunityIcons name="shield-outline" size={24} color="#004c97" />
+            </View>
+            <TouchableOpacity style={styles.notificationBtn}>
+              <Feather name="bell" size={24} color="#97999b" />
+              <View style={styles.badge} />
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.welcomeText}>Welcome,{"\n"}Clubmember</Text>
+          
+          <View style={styles.locationContainer}>
+            <Text style={styles.locationText}>No Location Selected</Text>
+            <MaterialCommunityIcons name="map-marker-outline" size={20} color="#00a3e0" />
+          </View>
+
+          <Text style={styles.subLabel}>DINERS CLUB® TRAVEL TOOLS</Text>
+        </View>
+
+        {/* Hero Section: Explore Lounges */}
+        <TouchableOpacity style={styles.heroCard}>
+          <ImageBackground 
+            source={{ uri: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800' }} 
+            style={styles.heroImage}
+            imageStyle={{ borderRadius: 12 }}
+          >
+            <View style={styles.heroOverlay}>
+              <Text style={styles.heroTitle}>Explore Lounges</Text>
+              <Feather name="arrow-right" size={24} color="#00a3e0" />
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
+
+        {/* Main Grid */}
+        <View style={styles.gridContainer}>
+          <GridItem title="Airport Services" icon="airplane" image="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=400" />
+          <GridItem title="Merchant Offers" icon="tag-outline" image="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=400" />
+          <GridItem title="ATM Finder" icon="atm" image="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=400" />
+          <GridItem title="Travel Guides" icon="book-open-variant" image="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400" />
+          <GridItem title="Account Access" icon="credit-card-outline" image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400" />
+          <GridItem title="Map View" icon="map-outline" image="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=400" />
+          <GridItem title="Currency Converter" icon="swap-horizontal" image="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=400" />
+          <GridItem title="Tip Calculator" icon="calculator" image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400" />
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const GridItem = ({ title, icon, image }: { title: string, icon: any, image: string }) => (
+  <TouchableOpacity style={styles.gridItem}>
+    <ImageBackground source={{ uri: image }} style={styles.gridImage} imageStyle={{ borderRadius: 12 }}>
+      <View style={styles.iconBadge}>
+        <MaterialCommunityIcons name={icon} size={16} color="white" />
+      </View>
+      <View style={styles.gridTitleContainer}>
+        <Text style={styles.gridTitle}>{title}</Text>
+      </View>
+    </ImageBackground>
+  </TouchableOpacity>
+);
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#f7f7f7' },
+  header: { paddingHorizontal: 24, paddingTop: 20 },
+  topIcons: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
+  logoCircle: { width: 40, height: 40, borderRadius: 20, borderWidth: 2, borderColor: '#004c97', justifyContent: 'center', alignItems: 'center' },
+  notificationBtn: { width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
+  badge: { position: 'absolute', top: 8, right: 8, width: 8, height: 8, borderRadius: 4, backgroundColor: '#009ca6' },
+  
+  welcomeText: { 
+    fontSize: 36, 
+    fontWeight: '700', // Gotham Bold
+    color: '#004c97', 
+    lineHeight: 40 
+  },
+  locationContainer: { flexDirection: 'row', alignItems: 'center', marginTop: 12 },
+  locationText: { fontSize: 16, color: '#97999b', marginRight: 8 }, // Gotham Book
+  subLabel: { fontSize: 11, color: '#97999b', letterSpacing: 1.5, marginTop: 24, fontWeight: '600' },
+
+  heroCard: { marginHorizontal: 16, marginTop: 16, height: 180 },
+  heroImage: { flex: 1, justifyContent: 'flex-end' },
+  heroOverlay: { 
+    backgroundColor: '#041e42', 
+    height: 50, 
+    borderBottomLeftRadius: 12, 
+    borderBottomRightRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20
+  },
+  heroTitle: { color: 'white', fontSize: 18, fontWeight: '600' },
+
+  gridContainer: { 
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    padding: 8, 
+    justifyContent: 'space-between' 
+  },
+  gridItem: { 
+    width: (width / 2) - 16, 
+    height: 140, 
+    margin: 8,
+  },
+  gridImage: { flex: 1, justifyContent: 'flex-end' },
+  iconBadge: { 
+    position: 'absolute', 
+    top: 8, 
+    right: 8, 
+    backgroundColor: '#00a3e0', 
+    borderRadius: 12, 
+    padding: 4 
+  },
+  gridTitleContainer: { 
+    backgroundColor: '#041e42', 
+    height: 40, 
+    borderBottomLeftRadius: 12, 
+    borderBottomRightRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  gridTitle: { color: 'white', fontSize: 13, fontWeight: '500', textAlign: 'center' },
+});
+
+export default App;
+
+
+
+
+
+
+import React from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  SafeAreaView, 
+  ScrollView, 
+  ImageBackground, 
+  TouchableOpacity, 
+  Dimensions 
+} from 'react-native';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+
+const { width } = Dimensions.get('window');
+
+// 1. DYNAMIC DATA ARRAY
+const SERVICES_DATA = [
+  { id: '1', title: 'Airport Services', icon: 'airplane', image: 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=400' },
+  { id: '2', title: 'Merchant Offers', icon: 'tag-outline', image: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=400' },
+  { id: '3', title: 'ATM Finder', icon: 'atm', image: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=400' },
+  { id: '4', title: 'Travel Guides', icon: 'book-open-variant', image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400' },
+  { id: '5', title: 'Account Access', icon: 'credit-card-outline', image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400' },
+  { id: '6', title: 'Map View', icon: 'map-outline', image: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=400' },
+  { id: '7', title: 'Currency Converter', icon: 'swap-horizontal', image: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=400' },
+  { id: '8', title: 'Tip Calculator', icon: 'calculator', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400' },
+];
+
+const App = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        
+        {/* Static Header Section */}
+        <View style={styles.header}>
+          <View style={styles.topIcons}>
+            <View style={styles.logoCircle}>
+              <MaterialCommunityIcons name="shield-outline" size={24} color="#004c97" />
+            </View>
+            <TouchableOpacity style={styles.notificationBtn}>
+              <Feather name="bell" size={24} color="#97999b" />
+              <View style={styles.badge} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.welcomeText}>Welcome,{"\n"}Clubmember</Text>
+          <View style={styles.locationContainer}>
+            <Text style={styles.locationText}>No Location Selected</Text>
+            <MaterialCommunityIcons name="map-marker-outline" size={20} color="#00a3e0" />
+          </View>
+          <Text style={styles.subLabel}>DINERS CLUB® TRAVEL TOOLS</Text>
+        </View>
+
+        {/* Hero Section */}
+        <TouchableOpacity style={styles.heroCard}>
+          <ImageBackground 
+            source={{ uri: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800' }} 
+            style={styles.heroImage}
+            imageStyle={{ borderRadius: 12 }}
+          >
+            <View style={styles.heroOverlay}>
+              <Text style={styles.heroTitle}>Explore Lounges</Text>
+              <Feather name="arrow-right" size={24} color="#00a3e0" />
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
+
+        {/* 2. DYNAMIC GRID RENDERING */}
+        <View style={styles.gridContainer}>
+          {SERVICES_DATA.map((item) => (
+            <TouchableOpacity key={item.id} style={styles.gridItem}>
+              <ImageBackground 
+                source={{ uri: item.image }} 
+                style={styles.gridImage} 
+                imageStyle={{ borderRadius: 12 }}
+              >
+                <View style={styles.iconBadge}>
+                  <MaterialCommunityIcons name={item.icon as any} size={16} color="white" />
+                </View>
+                <View style={styles.gridTitleContainer}>
+                  <Text style={styles.gridTitle} numberOfLines={1}>{item.title}</Text>
+                </View>
+              </ImageBackground>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Bottom Padding */}
+        <View style={{ height: 40 }} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#f7f7f7' },
+  header: { paddingHorizontal: 24, paddingTop: 20 },
+  topIcons: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
+  logoCircle: { width: 40, height: 40, borderRadius: 20, borderWidth: 2, borderColor: '#004c97', justifyContent: 'center', alignItems: 'center' },
+  notificationBtn: { width: 40, height: 40, justifyContent: 'center', alignItems: 'center' },
+  badge: { position: 'absolute', top: 8, right: 8, width: 8, height: 8, borderRadius: 4, backgroundColor: '#009ca6' },
+  welcomeText: { fontSize: 36, fontWeight: '700', color: '#004c97', lineHeight: 40 },
+  locationContainer: { flexDirection: 'row', alignItems: 'center', marginTop: 12 },
+  locationText: { fontSize: 16, color: '#97999b', marginRight: 8 },
+  subLabel: { fontSize: 11, color: '#97999b', letterSpacing: 1.5, marginTop: 24, fontWeight: '600' },
+  heroCard: { marginHorizontal: 16, marginTop: 16, height: 180 },
+  heroImage: { flex: 1, justifyContent: 'flex-end' },
+  heroOverlay: { backgroundColor: '#041e42', height: 50, borderBottomLeftRadius: 12, borderBottomRightRadius: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20 },
+  heroTitle: { color: 'white', fontSize: 18, fontWeight: '600' },
+  gridContainer: { flexDirection: 'row', flexWrap: 'wrap', padding: 8, justifyContent: 'flex-start' },
+  gridItem: { width: (width / 2) - 16, height: 140, margin: 8 },
+  gridImage: { flex: 1, justifyContent: 'flex-end' },
+  iconBadge: { position: 'absolute', top: 8, right: 8, backgroundColor: '#00a3e0', borderRadius: 12, padding: 4, elevation: 3 },
+  gridTitleContainer: { backgroundColor: '#041e42', height: 40, borderBottomLeftRadius: 12, borderBottomRightRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 5 },
+  gridTitle: { color: 'white', fontSize: 13, fontWeight: '500', textAlign: 'center' },
+});
+
+export default App;
