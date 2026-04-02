@@ -191,3 +191,17 @@ const styles = StyleSheet.create({
 });
 
 export default DinersNavigation;
+
+  const [activeTab, setActiveTab] = useState('Home');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchActive, setIsSearchActive] = useState(false);
+
+
+  <DinersNavigation 
+        activeTab={activeTab}
+        onTabPress={setActiveTab}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        isSearchActive={isSearchActive}
+        setIsSearchActive={setIsSearchActive}
+      />
